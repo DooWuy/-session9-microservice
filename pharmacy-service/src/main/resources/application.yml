@@ -23,3 +23,12 @@ resilience4j:
                 sliding-window-size: 10
                 minimum-number-of-calls: 5
                 permitted-number-of-calls-in-half-open-state: 3
+    retry:
+        instances:
+            insuranceRetry:
+                max-attempts: 3
+                wait-duration: 2s
+                retry-exceptions:
+                    - java.net.ConnectException
+                    - java.net.SocketTimeoutException
+                    - org.springframework.web.reactive.function.client.WebClientRequestException

@@ -16,6 +16,19 @@ resilience4j:
                 limit-refresh-period: 10s
                 timeout-duration: 0s
 
+    circuitbreaker:
+        instances:
+            insuranceCB:
+                failure-rate-threshold: 60
+                sliding-window-type: COUNT_BASED
+                sliding-window-size: 10
+                minimum-number-of-calls: 5
+                wait-duration-in-open-state: 20s
+                permitted-number-of-calls-in-half-open-state: 3
+
+
+
+
 management:
     endpoints:
         web:
