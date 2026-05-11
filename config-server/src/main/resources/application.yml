@@ -1,0 +1,23 @@
+resilience4j:
+    retry:
+        instances:
+            invoiceRetry:
+                max-attempts: 3
+                wait-duration: 2s
+                retry-exceptions:
+                    - java.net.ConnectException
+                    - java.net.SocketTimeoutException
+                    - org.springframework.web.client.ResourceAccessException
+
+    ratelimiter:
+        instances:
+            invoiceRateLimiter:
+                limit-for-period: 5
+                limit-refresh-period: 10s
+                timeout-duration: 0s
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,retries,ratelimiters
